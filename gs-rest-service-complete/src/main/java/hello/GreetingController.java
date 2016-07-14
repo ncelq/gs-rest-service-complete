@@ -17,3 +17,11 @@ public class GreetingController {
                             String.format(template, name));
     }
 }
+
+/*
+qurl = "http://ichart.finance.yahoo.com/table.csv?s=" & Symbol
+qurl = qurl & "&a=" & Month(StartDate) - 1 & "&b=" & Day(StartDate) & _
+    "&c=" & Year(StartDate) & "&d=" & Month(EndDate) - 1 & "&e=" & _
+    Day(EndDate) & "&f=" & Year(EndDate) & "&g=" & Sheets(stock).Range("a1") & "&q=q&y=0&z=" & _
+    Symbol & "&x=.csv"
+           */
