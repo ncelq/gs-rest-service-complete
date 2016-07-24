@@ -2,6 +2,7 @@
 package yahoofinance.histquotes;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -44,7 +45,7 @@ public class HistoricalQuote {
     
 
     public double getAvgStdNo() {
-		return avgStdNo;
+    	return new BigDecimal(avgStdNo).setScale(4,RoundingMode.HALF_UP).doubleValue();
 	}
 
 	public void setAvgStdNo(double avgStdNo) {
@@ -52,7 +53,7 @@ public class HistoricalQuote {
 	}
 
 	public double getAvg() {
-		return avg;
+		return new BigDecimal(avg).setScale(4,RoundingMode.HALF_UP).doubleValue();
 	}
 
 	public void setAvg(double avg) {
@@ -60,7 +61,7 @@ public class HistoricalQuote {
 	}
 
 	public double getStd() {
-		return std;
+		return new BigDecimal(std).setScale(4,RoundingMode.HALF_UP).doubleValue();
 	}
 
 	public void setStd(double std) {
@@ -148,16 +149,19 @@ public class HistoricalQuote {
     }
     
     public double getStdNo() {
-    	return (this.getAdjClose().doubleValue() - this.getAvg())/this.getStd();
+    	try {
+    		return new BigDecimal((this.getAdjClose().doubleValue() - this.getAvg())/this.getStd()).setScale(4,RoundingMode.HALF_UP).doubleValue();	
+    	} catch (NumberFormatException ex) {
+    		return Double.NaN;
+    	}
+    	
     }
     
-    
-
 	@Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = dateFormat.format(this.date.getTime());
-        return this.symbol + "@" + dateStr + ": " + this.low + "-" + this.high + ", " + 
-                this.open + "->" + this.close + " (" + this.adjClose + ") | " + this.avg + ", " + this.std + ", " + this.getStdNo() + ", "+this.getAvgStdNo()+"\n";
+        return this.symbol + "@" + dateStr + ": " + this.low + "-" + this.high + "," + 
+                this.open + "->" + this.close + "," + this.adjClose + "," + this.getAvg() + "," + this.getStd() + "," + this.getStdNo() + ","+this.getAvgStdNo()+"\n";
     }
 }

@@ -15,7 +15,7 @@ public class QuoteTest {
 	public void test() throws IOException {
 		String ticket = "SPY";
 
-    	Calendar from = new GregorianCalendar(2007,0,1);	
+    	Calendar from = new GregorianCalendar(2000,0,1);	
     	Calendar to = Calendar.getInstance();
     	
 
