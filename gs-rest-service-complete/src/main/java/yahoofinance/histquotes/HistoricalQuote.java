@@ -150,7 +150,7 @@ public class HistoricalQuote {
     
     public double getStdNo() {
     	try {
-    		return new BigDecimal((this.getAdjClose().doubleValue() - this.getAvg())/this.getStd()).setScale(4,RoundingMode.HALF_UP).doubleValue();	
+    		return new BigDecimal((this.getAdjClose().doubleValue() - this.getAvg())/this.getStd()).setScale(2,RoundingMode.HALF_UP).doubleValue();	
     	} catch (NumberFormatException ex) {
     		return Double.NaN;
     	}
